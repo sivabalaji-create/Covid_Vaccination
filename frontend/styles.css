@@ -1,132 +1,44 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  #signup-form,
-  #login-form {
-    max-width: 300px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-  }
-  
-  input[type="email"],
-  input[type="password"],
-  select {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  section {
-    margin-bottom: 20px;
-  }
-  
-  h1, h2, h3 {
-    color: #333;
-  }
-  
-  #search-section {
-    text-align: center;
-  }
-  
-  #search-form {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    margin-bottom: 10px;
-  }
-  
-  #search-form input[type="text"] {
-    width: 3000px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  #search-form button {
-    padding: 8px 20px;
-    margin-left: 10px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #search-form button:hover {
-    background-color: #45a049;
-  }
-  
-  .center-card {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .center-card h3 {
-    margin-top: 0;
-  }
-  
-  .book-button {
-    padding: 8px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .book-button:hover {
-    background-color: #45a049;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f0f0f0;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#signup-form,
+#login-form {
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+input[type="email"],
+input[type="password"],
+select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
