@@ -81,36 +81,38 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Define the vaccination centre schema and model
-const vaccinationCentreSchema = new mongoose.Schema({
-  centreName: { type: String, required: true },
-  location: { type: String, required: true },
-  capacity: { type: Number, required: true },
+// Define a schema for the data
+const centreSchema = new mongoose.Schema({
+  centreName: String,
+  location: String,
+  capacity: Number
 });
+const Centre = mongoose.model('Centre', centreSchema);
 
-const VaccinationCentre = mongoose.model('VaccinationCentre', vaccinationCentreSchema);
+// Middleware
+//app.use(express.json()); 
+//app.use(express.urlencoded({ extended: false })); 
 
-// Route for adding a vaccination centre
-app.post('/addCentre', async (req, res) => {
-  try {
-    const { centreName, location, capacity } = req.body;
+// Handle form submission
+app.post('/addCentre', (req, res) => {
+  const { centreName, location, capacity } = req.body;
 
-    // Create a new vaccination centre document
-    const newCentre = new VaccinationCentre({
-      centreName: centreName,
-      location: location,
-      capacity: capacity,
-    });
+  // Create a new Centre document
+  const newCentre = new Centre({
+    centreName,
+    location,
+    capacity
+  });
 
-    // Save the new centre to the database
-    await newCentre.save();
-
-    // Return the saved centre in the response
-    res.status(201).json(newCentre);
-  } catch (error) {
-    console.error('Failed to add vaccination centre', error);
-    res.status(500).send('Internal Server Error');
-  }
+  // Save the document to the database
+  newCentre.save((err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error saving to database');
+    } else {
+      res.status(200).send('Centre added to database');
+    }
+  });
 });
 
 // Route for removing a vaccination centre

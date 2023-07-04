@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Function to send an HTTP request to the server
 async function sendRequest(url, method, data) {
-    const response = await fetch(url, {
+    const response = await fetch(url,{
       method: method,
       headers: {
         'Content-Type': 'application/json',
@@ -24,40 +24,44 @@ async function sendRequest(url, method, data) {
       body: JSON.stringify(data),
     });
   
+    //if (!response.ok) {
+      //const errorMessage = await response.text();
+      //throw new Error(errorMessage);
+    //}
     if (!response.ok) {
       const errorMessage = await response.text();
-      throw new Error(errorMessage);
+      console.error(`Request failed with status ${response.status}: ${errorMessage}`);
+      throw new Error(`Request failed with status ${response.status}`);
     }
+  
   
     const responseData = await response.json();
     return responseData;
   }
   
-  // Function to handle the form submission for adding a vaccination centre
-  async function addCentreHandler(event) {
-    event.preventDefault();
-  
-    const centreName = document.getElementById('centreName').value;
-    const location = document.getElementById('location').value;
-    const capacity = parseInt(document.getElementById('capacity').value);
-  
-    // Send the centre details to the server
-    try {
-      const response = await sendRequest('/addCentre', 'POST', {
-        centreName: centreName,
-        location: location,
-        capacity: capacity,
-      });
-  
-      // Handle the response from the server
-      console.log(response);
-      // You can display a success message or perform additional actions here
-    } catch (error) {
-      console.error(error);
-      // Handle the error condition
-      // You can display an error message or perform additional actions here
-    }
+// Function to handle the form submission for adding a vaccination centre
+async function addCentreHandler(event) {
+  event.preventDefault();
+
+  const centreName = document.getElementById('centreName').value;
+  const location = document.getElementById('location').value;
+  const capacity = parseInt(document.getElementById('capacity').value);
+
+  // Send the centre details to the server
+  try {
+    const response = await sendRequest('http://localhost:3000/addCentre', 'POST', {
+      centreName: centreName,
+      location: location,
+      capacity: capacity,
+    });
+
+    // Handle the response from the server
+    console.log("Data is not added successfully");
+  } catch (error) {
+    console.error(error);
   }
+}
+
   
   // Function to handle the form submission for removing a vaccination centre
   async function removeCentreHandler(event) {
