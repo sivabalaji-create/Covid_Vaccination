@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" type="text/css" href="admin.css">
+</head>
+<body>
+    
+        <header>
+        <h1>Admin Panel</h1>
+        <button id="logout-button">Logout</button>
+        </header>
+
+        <div class="container">
+        <div class="card">
+            <h2>Add Vaccination Centre</h2>
+            <form id="addCentreForm">
+                <label for="centreName">Centre Name:</label>
+                <input type="text" id="centreName" name="centreName" required><br><br>
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required><br><br>
+
+                <label for="capacity">Capacity:</label>
+                <input type="number" id="capacity" name="capacity" required><br><br>
+
+                <input type="submit" value="Add Centre">
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Get Dosage Details (Grouped by Centres)</h2>
+            <button id="getDosageButton">Get Dosage Details</button>
+            <div id="dosageDetails"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h2>Remove Vaccination Centre</h2>
+            <form id="removeCentreForm">
+                <label for="centreId">Centre ID:</label>
+                <input type="text" id="centreId" name="centreId" required><br><br>
+
+                <input type="submit" value="Remove Centre">
+            </form>
+        </div>
+    </div>
+        <footer>
+            <p>&copy; 2023 COVID Vaccination Slot Booking</p>
+          </footer>
+    
+
+    <script src="admin.js"></script>
+</body>
+</html>
