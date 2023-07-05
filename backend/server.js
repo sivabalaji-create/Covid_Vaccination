@@ -33,6 +33,8 @@ app.use(express.json());
 // Enable CORS
 app.use(cors());
 
+// ...
+
 // Handle signup form submission
 app.post('/signup', (req, res) => {
   const { email, password, role } = req.body;
@@ -49,7 +51,6 @@ app.post('/signup', (req, res) => {
       res.status(500).send('Signup failed');
     });
 });
-
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
@@ -85,43 +86,48 @@ app.post('/login', (req, res) => {
 const centreSchema = new mongoose.Schema({
   centreName: String,
   location: String,
-  capacity: Number
+  capacity: Number,
+  startTime: String,
+  endTime: String
 });
 const Centre = mongoose.model('Centre', centreSchema);
 
 // Middleware
-//app.use(express.json()); 
-//app.use(express.urlencoded({ extended: false })); 
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: false })); 
 
 // Handle form submission
 app.post('/addCentre', (req, res) => {
-  const { centreName, location, capacity } = req.body;
+  const { centreName, location, capacity, startTime, endTime } = req.body;
 
   // Create a new Centre document
   const newCentre = new Centre({
     centreName,
     location,
-    capacity
+    capacity,
+    startTime,
+    endTime
   });
 
   // Save the document to the database
-  newCentre.save((err) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error saving to database');
-    } else {
-      res.status(200).send('Centre added to database');
-    }
-  });
+  newCentre.save()
+    .then(() => {
+      res.status(200).json({ message: 'Centre added to database' });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: 'Error saving to database', errorMessage: error.message });
+    });
 });
 
-// Route for removing a vaccination centre
+
+//Route for removing a vaccination centre
 app.post('/removeCentre', async (req, res) => {
   try {
     const { centreId } = req.body;
 
     // Find and remove the centre with the provided ID
-    const removedCentre = await VaccinationCentre.findByIdAndRemove(centreId);
+    const removedCentre = await centres.findByIdAndRemove(centreId);
 
     if (!removedCentre) {
       res.status(404).send('Centre not found');
@@ -134,6 +140,23 @@ app.post('/removeCentre', async (req, res) => {
     console.error('Failed to remove vaccination centre', error);
     res.status(500).send('Internal Server Error');
   }
+});
+
+app.get('/centers', (req, res) => {
+  // Retrieve all vaccination centers from the database
+  Centre.find()
+    .then((centers) => {
+      res.status(200).json(centers);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: 'Error retrieving vaccination centers', errorMessage: error.message });
+    });
+});
+
+app.post('/bookSlot', (req, res) => {
+  // Example response
+  res.json({ message: 'Slot booked successfully' });
 });
 
 // Start the server

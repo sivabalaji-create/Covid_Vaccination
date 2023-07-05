@@ -26,7 +26,7 @@ signupForm.addEventListener('submit', (event) => {
     .then((response) => response.text())
     .then((result) => {
       console.log(result);
-      // Handle success or display an appropriate message to the user
+      alert("SignUp successfully");
     })
     .catch((error) => {
       console.error(error);

@@ -42,3 +42,9 @@ button {
 button:hover {
   background-color: #45a049;
 }
+footer {
+  background-color: #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+}

@@ -39,13 +39,16 @@ async function sendRequest(url, method, data) {
     return responseData;
   }
   
-// Function to handle the form submission for adding a vaccination centre
+
+ // Function to handle the form submission for adding a vaccination centre
 async function addCentreHandler(event) {
   event.preventDefault();
 
   const centreName = document.getElementById('centreName').value;
   const location = document.getElementById('location').value;
   const capacity = parseInt(document.getElementById('capacity').value);
+  const startTime = document.getElementById('startTime').value;
+  const endTime = document.getElementById('endTime').value;
 
   // Send the centre details to the server
   try {
@@ -53,37 +56,43 @@ async function addCentreHandler(event) {
       centreName: centreName,
       location: location,
       capacity: capacity,
+      startTime: startTime,
+      endTime: endTime
     });
 
     // Handle the response from the server
-    console.log("Data is not added successfully");
+    if (response.error) {
+      console.error(response.error);
+      // Handle the error condition
+      // You can display an error message or perform additional actions here
+    } else {
+      console.log('Centre added successfully');
+      alert("Centre added successfully");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+// Function to handle the form submission for removing a vaccination centre
+async function removeCentreHandler(event) {
+  event.preventDefault();
+
+  const centreId = document.getElementById('centreId').value;
+  try {
+    const response = await sendRequest('http://localhost:3000/removeCentre', 'POST', {
+      centreId: centreId
+    });
+    if (response.error) {
+      console.error(response.error);
+    } else {
+      console.log('Centre removed successfully');
+    }
   } catch (error) {
     console.error(error);
   }
 }
 
-  
-  // Function to handle the form submission for removing a vaccination centre
-  async function removeCentreHandler(event) {
-    event.preventDefault();
-  
-    const centreId = document.getElementById('centreId').value;
-  
-    // Send the centre ID to the server for removal
-    try {
-      const response = await sendRequest('/removeCentre', 'POST', {
-        centreId: centreId,
-      });
-  
-      // Handle the response from the server
-      console.log(response);
-      // You can display a success message or perform additional actions here
-    } catch (error) {
-      console.error(error);
-      // Handle the error condition
-      // You can display an error message or perform additional actions here
-    }
-  }
+
   
   // Add event listeners to the forms
   const addCentreForm = document.getElementById('addCentreForm');
